@@ -6,7 +6,6 @@ const publicPath = ''
 
 module.exports = (options = {}) => ({
   entry: {
-    vendor: './src/vendor',
     index: './src/main.js'
   },
   output: {
@@ -42,15 +41,18 @@ module.exports = (options = {}) => ({
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest']
+      names: ['manifest']
     }),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
     })
   ],
   resolve: {
+    extensions:['.js','.vue','.json'],
     alias: {
-      '~': resolve(__dirname, 'src')
+      'vue$':'vue/dist/vue.esm.js',
+      '@': resolve(__dirname, 'src'),
+      'scss_vars':'@style/vars.scss'
     },
     extensions: ['.js', '.vue', '.json', '.css']
   },
