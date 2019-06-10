@@ -33,5 +33,5 @@ npm run build
 
 ## my personal demo
 ```
-个人vue项目
+个人vue项目 
 ```
