@@ -89,6 +89,8 @@ export default {
   },
   created() {
     this.getImageCode();
+    console.log('zzz')
+   
   },
 
   methods: {
@@ -106,6 +108,8 @@ export default {
         'imageCode':code
         }
         this.logining=true;
+        console.log('查看基本的axios配置')
+        console.log(this.$axios);
       this.$axios.post(`${baseUrl}/orgtree/login`, params, {
         headers: {
             'code': code,
@@ -118,7 +122,7 @@ export default {
     }, err=> {
       
       console.log(err);
-      //  throw new Error('接口不通,请重新尝试');
+        // throw new Error('接口不通,请重新尝试');
        this.mockLogin(account,that.ruleForm2.checkPass);
       })},
 

@@ -8,7 +8,7 @@
 
         <el-col :span="16" class="part-right">
           <!-- 查詢功能 -->
-          <Manage :data='tableData'/>
+          <Manage :defaultData='tableData' :classicName='classicName'/>
         </el-col>
       </el-container>
         
@@ -18,6 +18,7 @@
     
 </template>
 <script>
+import {getQueryData,getPersonalData} from '../../api/api'
 import Manage from '../../components/manage.vue';
 import Query from '../../components/query.vue'
 export default {
@@ -25,48 +26,51 @@ export default {
     data () {
         return {
             msg:'厂商管理',
-            queryData: [{
-          label: '中国人寿保险股份有限公司',
-          children: [{
-            label: '董事会秘书局',
-            children: [{
-              label: '三级 1-1-1'
-            }]
-          },{
-              label: '战略与市场部',
-              children:[
-                {
-                  label:'资源整合处'
-                }
-              ]
-
-          },{
-            label:'人力资源部',
-            children:[{
-              label:'绩效管理处'
-            }]
-          }]
-        }],
-        tableData: [{
-          date: '100000',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }]
-
-            
+            queryData: [],
+            tableData: [],
+            classicName:[{
+              id:0,
+              text:'人员编号',
+               name:'number'
+            },{
+               id:1,
+               text:'邮箱',
+               name:'mail'
+            },{
+              id:2,
+              text:'手机号',
+              name:'phone'
+            },{
+              id:3,
+              text:'部门名称',
+              name:'partName'
+               },{
+                 id:4,
+                 text:'修改时间',
+                 name:'fixTime'
+               },{
+                 id:5,
+                 text:'操作',
+                 name:'operate'
+               }]
         }
+    },
+    mounted () {
+       let that=this;
+       getQueryData({name:'xxx'}).then(res=>{
+           console.log(res)
+           that.queryData=res.data;
+       },error=>{
+           throw new Error('请求错误')
+       });
+       getPersonalData({test:'xxx'}).then(res=>{
+         console.log('res.data');
+         console.log(res.data)
+           that.tableData=res.data;
+       },err=>{
+           throw new Error('数据错误，请重新再试')
+       })
+      
     },
     components: {
         Query,

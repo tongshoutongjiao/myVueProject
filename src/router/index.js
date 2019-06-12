@@ -41,9 +41,9 @@ export default new  Router({
             name:'业务模块',
             iconCls:'fa fa-dedent',
             children:[
-                { path: '/organize', component: Organize, name: 'Organize' },
-                { path: '/self', component: Self, name: 'Self' },
-                { path: '/manu', component: Manu, name: 'Manu' },
+                { path: '/organize', component: Organize, name: '组织管理',  iconCls: 'el-icon-message'},
+                { path: '/self', component: Self, name: '自有人员管理' ,iconCls:'el-icon-message'},
+                { path: '/manu', component: Manu, name: '厂商人员管理' ,iconCls:'el-icon-message'},
             ]
 
         },

@@ -6,3 +6,7 @@ export const getCount=state=>{
 export const getSelectKey=state=>{
     return state.selectKey
 }
+
+export const getQueryData=state=>{
+    return state.queryData
+}

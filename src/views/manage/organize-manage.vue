@@ -5,7 +5,7 @@
             <Query :data='queryData'/>
         </el-col>
         <el-col :span='16' class="part-right">
-            <Manage :data='tableData'/>
+            <Manage :defaultData='tableData' :classicName='classicName' />
         </el-col>
 
     </el-container>
@@ -13,7 +13,7 @@
     
 </template>
 <script>
-import {getQueryData} from '../../api/api'
+import {getQueryData,getTableData} from '../../api/api'
 import Manage from '../../components/manage.vue';
 import Query from '../../components/query.vue';
 export default {
@@ -22,23 +22,27 @@ export default {
         return {
             msg:'厂商管理',
             queryData: [],
-        tableData: [{
-          date: '100000',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄',
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }]
+            classicName:[
+                {
+                    name:'number',
+                    text:'编号',
+                    id:0
+                 },{
+                     name:'name',
+                     text:'组织名称',
+                     id:1
+                 },{
+                     name:'date',
+                     text:'创建时间',
+                     id:3
+                 },{
+                     name:'operate',
+                     text:'操作',
+                     id:4
+                 }
+
+            ] ,
+        tableData: []
 
             
         }
@@ -51,7 +55,13 @@ export default {
        },error=>{
            throw new Error('请求错误')
        });
-       console.log(this.queryData)
+       getTableData({test:'xxx'}).then(res=>{
+           console.log(res.data);
+           that.tableData=res.data;
+       },err=>{
+           throw new Error('数据错误，请重新再试')
+       })
+       
     } ,
     components: {
         Query,

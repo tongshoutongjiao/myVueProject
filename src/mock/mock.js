@@ -1,6 +1,6 @@
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { LoginUsers, Users,queryData} from './data/user';
+import { LoginUsers, Users,queryData,tableData,personalData} from './data/user';
 let _Users = Users;
 
 export default {
@@ -167,6 +167,48 @@ export default {
       })
 
     })
+
+    // 获取用户数据
+    mock.onGet('/user/getQueryData').reply(config=>{
+    
+      return new Promise((resolve,reject)=>{
+        setTimeout(() => {
+          resolve([200, {
+            code: 200,
+            data: queryData
+          }]);
+        }, 500);
+      })
+
+    })
+
+    // 获取表格数据
+    mock.onGet('/user/getTableData').reply(config=>{
+      return new Promise((resolve,reject)=>{
+        setTimeout(() => {
+          resolve([200, {
+            code: 200,
+            data: tableData
+          }]);
+        }, 100);
+      })
+
+    })
+
+    //  获取人员列表
+    mock.onGet('/user/personalData').reply(config=>{
+      return new Promise((resolve,reject)=>{
+        setTimeout(() => {
+          resolve([200, {
+            code: 200,
+            data: personalData
+          }]);
+        }, 100);
+      })
+
+    })
+
+    
 
   }
 };

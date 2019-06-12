@@ -12,6 +12,13 @@ import axios from 'axios';
 
 
 Mock.bootstrap();
+
+
+// 设置axios请求的token
+axios.defaults.headers.common['token'] = 'f4c902c9ae5a2a9d8f84868ad064e706'
+//设置请求头
+axios.defaults.headers.post["Content-type"] = "application/json"
+axios.defaults.baseURL=process.env.API_ROOT
 Vue.prototype.$axios=axios;
 Vue.prototype.$getCode=function(pwd){
   // new 一个对象
@@ -22,10 +29,7 @@ Vue.prototype.$getCode=function(pwd){
   return data;
 }
 
-// 设置axios请求的token
-axios.defaults.headers.common['token'] = 'f4c902c9ae5a2a9d8f84868ad064e706'
-//设置请求头
-axios.defaults.headers.post["Content-type"] = "application/json"
+
 
 Vue.use(ElementUI)
 
